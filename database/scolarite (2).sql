@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 10 avr. 2026 à 00:53
+-- Généré le : ven. 10 avr. 2026 à 01:19
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -31,14 +31,14 @@ CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `nom` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `mot de passe` varchar(100) NOT NULL
+  `mot_de_passe` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `admin`
 --
 
-INSERT INTO `admin` (`id`, `nom`, `email`, `mot de passe`) VALUES
+INSERT INTO `admin` (`id`, `nom`, `email`, `mot_de_passe`) VALUES
 (1, 'admin', 'admin@scolarite.com', 'scolarite');
 
 -- --------------------------------------------------------
@@ -51,7 +51,7 @@ CREATE TABLE `enseignants` (
   `id` int(11) NOT NULL,
   `nom` varchar(100) NOT NULL,
   `prenom` varchar(100) NOT NULL,
-  `mot de passe` varchar(100) NOT NULL,
+  `mot_de_passe` varchar(255) DEFAULT NULL,
   `specialite` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -60,7 +60,7 @@ CREATE TABLE `enseignants` (
 -- Déchargement des données de la table `enseignants`
 --
 
-INSERT INTO `enseignants` (`id`, `nom`, `prenom`, `mot de passe`, `specialite`, `email`) VALUES
+INSERT INTO `enseignants` (`id`, `nom`, `prenom`, `mot_de_passe`, `specialite`, `email`) VALUES
 (1, 'chrif', 'sofiane', 'sofiane123', 'archi', 'chrif.sofiane@scolarite.com'),
 (2, 'gherbi', 'selma', 'selma123', 'pweb', 'gherbi.selma@scolarite.com'),
 (3, 'chahir', 'sara', 'sara123', 'systeme d\'exploitation', 'chahir.sara@scolarite.com'),
@@ -81,7 +81,7 @@ CREATE TABLE `etudiant` (
   `nom` varchar(100) NOT NULL,
   `prenom` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `mot de passe` varchar(100) NOT NULL,
+  `mot_de_passe` varchar(20) DEFAULT NULL,
   `niveau` varchar(50) NOT NULL,
   `filiere` varchar(50) NOT NULL,
   `date_naissance` date DEFAULT NULL
@@ -91,7 +91,7 @@ CREATE TABLE `etudiant` (
 -- Déchargement des données de la table `etudiant`
 --
 
-INSERT INTO `etudiant` (`id`, `matricule`, `nom`, `prenom`, `email`, `mot de passe`, `niveau`, `filiere`, `date_naissance`) VALUES
+INSERT INTO `etudiant` (`id`, `matricule`, `nom`, `prenom`, `email`, `mot_de_passe`, `niveau`, `filiere`, `date_naissance`) VALUES
 (1, '212431859912', 'ABAOUI', 'LYNA-MELISSA', 'abaoui.lyna.melissa@etu.com', '10022005', 'L1', 'Informatique', '2005-02-10'),
 (2, '232431546203', 'ABBAS', 'MAYA MYRIAM', 'abbas.maya.myriam@etu.com', '27042005', 'L1', 'Informatique', '2005-04-27'),
 (3, '242431599204', 'ABDELHAMID', 'AKRAM', 'abdelhamid.akram@etu.com', '05042007', 'L3', 'Informatique', '2007-04-05'),
