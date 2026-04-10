@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ========== ÉTUDIANT ==========
     if ($role === 'etudiant') {
 
-        // Chercher l'étudiant par matricule seulement
         $sql  = "SELECT * FROM etudiant WHERE matricule = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $identifiant);
@@ -22,18 +21,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($result->num_rows === 1) {
             $etudiant = $result->fetch_assoc();
 
-            // Vérifier le mot de passe en clair
-            if ($mot_de_passe === $etudiant['mot de passe']) {
+            // ✅ CORRIGÉ : mot_de_passe avec underscore
+            if ($mot_de_passe === $etudiant['mot_de_passe']) {
 
-                // Sauvegarder en session
                 $_SESSION['user_id']   = $etudiant['id'];
                 $_SESSION['user_nom']  = $etudiant['nom'];
                 $_SESSION['user_role'] = 'etudiant';
 
-                // Date de naissance format JJMMAAAA ex: 2004-08-16 → 16082004
                 $date_naissance_formatee = date('dmY', strtotime($etudiant['date_naissance']));
 
-                // Si mot de passe = date de naissance → première connexion
                 if ($mot_de_passe === $date_naissance_formatee) {
                     $_SESSION['premier_connexion'] = true;
                     header("Location: changer_mdp.php");
@@ -62,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($result->num_rows === 1) {
             $enseignant = $result->fetch_assoc();
+            // ✅ CORRIGÉ : mot_de_passe avec underscore
             if ($mot_de_passe === $enseignant['mot_de_passe']) {
                 $_SESSION['user_id']   = $enseignant['id'];
                 $_SESSION['user_nom']  = $enseignant['nom'];
@@ -87,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($result->num_rows === 1) {
             $admin = $result->fetch_assoc();
+            // ✅ CORRIGÉ : mot_de_passe avec underscore
             if ($mot_de_passe === $admin['mot_de_passe']) {
                 $_SESSION['user_id']   = $admin['id'];
                 $_SESSION['user_nom']  = $admin['nom'];

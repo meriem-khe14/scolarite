@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $erreur = "Le nouveau mot de passe ne peut pas être votre date de naissance.";
         } else {
             // ---- Tout est bon : mettre à jour le mot de passe ----
-            $stmt = $conn->prepare("UPDATE etudiant SET `mot de passe` = ? WHERE id = ?");
+            $stmt = $conn->prepare("UPDATE etudiant SET mot_de_passe = ? WHERE id = ?");
             $stmt->bind_param("si", $nouveau_mdp, $_SESSION['user_id']);
 
             if ($stmt->execute()) {
